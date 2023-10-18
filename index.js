@@ -217,12 +217,13 @@ async function writeReviewForCompany(page, spreadID) {
           dateInput.value = values;
         },
         'input[type="date"]',
-        "2023-10-15"
+        "2023-10-18"
       );
       await delay(1000);
 
-      await page.click('button[type="submit"]');
+      await page.click('button[type="submit"] > span');
       await delay(3000);
+      console.log("Write review success");
     }
   } catch (error) {
     console.log(error);
