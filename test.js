@@ -19,40 +19,15 @@ const url =
   "pictures/anh1.jpg pictures/anh2.jpg pictures/anh3.jpg pictures/anh4.jpg pictures/anh5.jpg pictures/anh6.jpg pictures/anh7.jpg pictures/anh8.jpg pictures/anh9.jpg";
 console.log(url.split(" "));
 
-// Tạo một ngày tháng năm ngẫu nhiên trong khoảng từ 1/1/2000 đến 12/31/2025
-function createRandomDateWithoutTime() {
-  const startYear = 2000;
-  const endYear = 2025;
+String.prototype.format = function () {
+  const args = arguments;
+  return this.replace(/{(\d+)}/g, function (match, number) {
+    return typeof args[number] != "undefined" ? args[number] : match;
+  });
+};
 
-  const year =
-    Math.floor(Math.random() * (endYear - startYear + 1)) + startYear;
-  const month = Math.floor(Math.random() * 12) + 1;
-  const day = Math.floor(Math.random() * 31) + 1;
-
-  const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-  const maxDaysInMonth = [
-    0,
-    31,
-    isLeapYear ? 29 : 28,
-    31,
-    30,
-    31,
-    30,
-    31,
-    31,
-    30,
-    31,
-    30,
-    31,
-  ];
-  if (day > maxDaysInMonth[month]) {
-    return createRandomDateWithoutTime();
-  }
-
-  const date = new Date(year, month - 1, day, 0, 0, 0, 0); // Thời gian 0 giờ, 0 phút, 0 giây, 0 mili giây
-
-  return date;
-}
-
-const randomDate = createRandomDateWithoutTime();
-console.log(randomDate);
+const evaluateNumberStar = ["1", "2", "3", "4", "5"];
+const numberStar =
+  evaluateNumberStar[Math.floor(Math.random() * evaluateNumberStar.length)];
+const selector = 'input[value="{0}"]'.format(numberStar);
+console.log(selector);

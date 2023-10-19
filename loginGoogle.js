@@ -51,51 +51,8 @@ async function runLimitEmailCapcha(func, limit) {
   }
 }
 
-async function createProfile() {
-  const proxy = JSON.stringify({
-    host: "oneadx.ddns.net",
-    mode: "http",
-    password: "tien",
-    port: 54019,
-    username: "tien",
-  });
-  await hidemyacc.create({
-    id: "",
-    name: "trust1",
-    os: "win",
-    browserSource: "marco",
-    browserType: "chrome",
-    proxy: proxy,
-  });
-}
-
 // de quy login
 async function runLogin(page, countEmail, emailList) {
-  // await createProfile();
-  // //get profile
-  // const profileList = await hidemyacc.profiles();
-
-  // const profileId = profileList.data[0].id;
-  // const response = await hidemyacc.start(profileId, {
-  //   startUrl: "about:blank",
-  // });
-  // if (response.code !== 1) {
-  //   throw new Error("Khong mo duoc trinh duyet");
-  // }
-
-  // const browser = await puppeteer.connect({
-  //   browserWSEndpoint: response.data.wsUrl,
-  //   defaultView: null,
-  //   slowMo: 60,
-  // });
-
-  // const pages = await browser.pages();
-  // let page;
-  // if (pages.length) {
-  //   page = pages[0];
-  // } else {
-  //   page = await browser.newPage();
-  // }
   if (countEmail < emailList.length) {
     try {
       const email = emailList[countEmail].email;
@@ -110,17 +67,6 @@ async function runLogin(page, countEmail, emailList) {
       const response = await checkLogin(page, email, password);
       console.log(response);
 
-      // if (response.susscess == 1) {
-      //   // await page.goto("https://mail.google.com/mail/u/0/#inbox", {
-      //   //   timeout: 30000,
-      //   //   waitUntil: "networkidle0",
-      //   // });
-      //   await page.close();
-      //   await delay(1000);
-      // } else {
-      //   //await page.close();
-      //   await delay(3000);
-      // }
       return await runLogin(page, countEmail + 1, emailList);
     } catch (error) {
       console.log(error);
